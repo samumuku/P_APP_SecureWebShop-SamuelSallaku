@@ -7,8 +7,11 @@
     "start": "nodemon server.js -L"
   },
   "dependencies": {
+    "body-parser": "^1.20.3",
+    "crypto": "^1.0.1",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "nodemon": "^3.1.0",
-    "ejs": "^3.1.10"
+    "mysql2": "^3.12.0",
+    "nodemon": "^3.1.0"
   }
 }

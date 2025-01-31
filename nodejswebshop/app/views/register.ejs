@@ -6,6 +6,7 @@
       href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
       rel="stylesheet"
     />
+    <script src="/models/conn.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Enregistrez-vous</title>
@@ -14,9 +15,23 @@
     <div class="main">
       <div class="enregistrement">
         <label>Créez votre compte</label>
-        <input type="text" placeholder="Utilisateur" />
-        <input type="password" placeholder="Mot de passe" />
-        <button>Créer</button>
+        <form action="/register" method="POST">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Utilisateur"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Mot de passe"
+            required
+          />
+          <button type="submit">Créer</button>
+        </form>
         <p>Vous avez déjà un compte ? <a href="/login">Connectez-vous</a></p>
       </div>
     </div>
