@@ -14,9 +14,23 @@
     <div class="main">
       <div class="connexion">
         <label>Connectez-vous</label>
-        <input type="text" placeholder="Utilisateur" />
-        <input type="password" placeholder="Mot de passe" />
-        <button>Connexion</button>
+        <form action="/login" method="POST">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Utilisateur"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Mot de passe"
+            required
+          />
+          <button type="submit">Connexion</button>
+        </form>
         <p>Vous n'avez pas de compte ? <a href="/register">Créez en un</a></p>
       </div>
     </div>
