@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - E-commerce</title>
+    <link rel="stylesheet" href="/home.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Our E-commerce Site</h1>
+      <nav>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <li><a href="/cart">Cart</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="welcome">
+        <h2>Welcome, <%= user.name %>!</h2>
+        <p>Explore our wide range of products and enjoy shopping!</p>
+      </section>
+      <section class="products">
+        <h2>Featured Products</h2>
+        <div class="product-list">
+          <!-- Example product -->
+          <div class="product-item">
+            <img src="/images/product1.jpg" alt="Product 1" />
+            <h3>Product 1</h3>
+            <p>$19.99</p>
+            <button>Add to Cart</button>
+          </div>
+          <!-- Add more products here -->
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 E-commerce Site. All rights reserved.</p>
+    </footer>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>

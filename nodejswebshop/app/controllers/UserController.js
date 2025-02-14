@@ -1,11 +1,9 @@
 const crypto = require("crypto");
 const conn = require("../models/conn");
+const privateKey = require("../auth/private_key.js");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
-  get: (req, res) => {
-    res.send("User: Samuel");
-  },
-
   register: (req, res) => {
     const { username, password } = req.body;
     const salt = crypto.randomBytes(16).toString("hex");
@@ -19,7 +17,7 @@ module.exports = {
       (err, results) => {
         if (err) {
           console.error("Error inserting data:", err);
-          res.status(500).send("Internal Server Error");
+          res.status(500).send("User already exists");
           return;
         }
         res.redirect("/login");
@@ -57,7 +55,11 @@ module.exports = {
               return;
             }
             if (results.length > 0) {
-              res.send("Login successful");
+              const token = jwt.sign({ username }, privateKey, {
+                expiresIn: "1y",
+              });
+              // Send the token to the client
+              res.json({ message: "Login successful", token });
             } else {
               res.send("Invalid username or password");
             }
