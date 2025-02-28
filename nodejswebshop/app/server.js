@@ -2,10 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const UserController = require("./controllers/UserController");
 const isAuthenticated = require("./auth/auth.js");
+const cookies = require("cookie-parser");
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookies());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
@@ -25,7 +27,7 @@ app.get("/register", (req, res) => {
 
 // Protect the home route
 app.get("/home", isAuthenticated, (req, res) => {
-  res.render("home", { user: req.session.user });
+  res.render("home", { user: req.user });
 });
 
 app.get("/login", (req, res) => {

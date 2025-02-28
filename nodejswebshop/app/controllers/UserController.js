@@ -20,6 +20,8 @@ module.exports = {
           res.status(500).send("User already exists");
           return;
         }
+        const token = jwt.sign({ username }, privateKey, { expiresIn: "1y" });
+        res.cookie("token", token, { httpOnly: true });
         res.redirect("/login");
       }
     );
@@ -58,8 +60,8 @@ module.exports = {
               const token = jwt.sign({ username }, privateKey, {
                 expiresIn: "1y",
               });
-              // Send the token to the client
-              res.json({ message: "Login successful", token });
+              res.cookie("token", token, { httpOnly: true });
+              res.redirect("/home");
             } else {
               res.send("Invalid username or password");
             }
