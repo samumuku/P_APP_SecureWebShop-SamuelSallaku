@@ -6,22 +6,21 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   register: (req, res) => {
     const { username, password } = req.body;
+    const defaultRole = "user";
     const salt = crypto.randomBytes(16).toString("hex");
     const hash = crypto
       .createHash("sha256")
       .update(password + salt)
       .digest("hex");
     conn.query(
-      "INSERT INTO t_users (username, hashedPassword, salt) VALUES (?, ?, ?)",
-      [username, hash, salt],
+      "INSERT INTO t_users (username, role, hashedPassword, salt) VALUES (?, ?, ?, ?)",
+      [username, defaultRole, hash, salt],
       (err, results) => {
         if (err) {
           console.error("Error inserting data:", err);
           res.status(500).send("User already exists");
           return;
         }
-        const token = jwt.sign({ username }, privateKey, { expiresIn: "1y" });
-        res.cookie("token", token, { httpOnly: true });
         res.redirect("/login");
       }
     );
@@ -39,7 +38,7 @@ module.exports = {
           return;
         }
         if (results.length === 0) {
-          res.send("Invalid username or password");
+          res.status(400).send("Invalid username or password");
           return;
         }
         const salt = results[0].salt;
@@ -70,8 +69,8 @@ module.exports = {
       }
     );
   },
-
   logout: (req, res) => {
+    res.clearCookie("token");
     res.redirect("/login");
   },
 };

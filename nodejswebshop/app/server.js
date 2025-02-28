@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const UserController = require("./controllers/UserController");
-const isAuthenticated = require("./auth/auth.js");
+const isAuth = require("./auth/auth.js");
+const isAdminAuth = require("./auth/auth.js");
 const cookies = require("cookie-parser");
 
 const app = express();
@@ -19,6 +20,10 @@ app.post("/register", UserController.register);
 
 app.post("/login", UserController.login);
 
+app.get("/admin", isAdminAuth, (req, res) => {
+  res.render("admin");
+});
+
 app.get("/logout", UserController.logout);
 
 app.get("/register", (req, res) => {
@@ -26,7 +31,7 @@ app.get("/register", (req, res) => {
 });
 
 // Protect the home route
-app.get("/home", isAuthenticated, (req, res) => {
+app.get("/home", isAuth, (req, res) => {
   res.render("home", { user: req.user });
 });
 

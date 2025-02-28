@@ -1,7 +1,7 @@
 const privateKey = require("./private_key.js");
 const jwt = require("jsonwebtoken");
 
-function isAuthenticated(req, res, next) {
+const isAuth = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
     return res.redirect("/login");
@@ -13,6 +13,8 @@ function isAuthenticated(req, res, next) {
     req.user = decoded;
     next();
   });
-}
+};
 
-module.exports = isAuthenticated;
+const isAdminAuth = () => {};
+
+(module.exports = isAuth), isAdminAuth;
