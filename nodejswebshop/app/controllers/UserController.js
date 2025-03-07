@@ -56,11 +56,15 @@ module.exports = {
               return;
             }
             if (results.length > 0) {
-              const token = jwt.sign({ username }, privateKey, {
-                expiresIn: "1y",
-              });
+              const token = jwt.sign(
+                { username: username, role: results[0].role },
+                privateKey,
+                {
+                  expiresIn: "1y",
+                }
+              );
               res.cookie("token", token, { httpOnly: true });
-              res.redirect("/home");
+              res.redirect("/users");
             } else {
               res.send("Invalid username or password");
             }

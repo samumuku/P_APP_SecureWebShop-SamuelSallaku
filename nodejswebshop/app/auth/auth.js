@@ -15,6 +15,18 @@ const isAuth = (req, res, next) => {
   });
 };
 
-const isAdminAuth = () => {};
+const isAdminAuth = (req, res, next) => {
+  const token = req.cookies.token;
+  jwt.verify(token, privateKey, (err, decoded) => {
+    if (err) {
+      return res.redirect("/home");
+    } else if (decoded.role !== "admin") {
+      return res.redirect("/home");
+    }
+    req.user = decoded;
+    next();
+  });
+};
 
-(module.exports = isAuth), isAdminAuth;
+exports.isAuth = isAuth;
+exports.isAdminAuth = isAdminAuth;

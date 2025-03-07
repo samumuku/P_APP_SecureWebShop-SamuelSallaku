@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const UserController = require("./controllers/UserController");
-const isAuth = require("./auth/auth.js");
-const isAdminAuth = require("./auth/auth.js");
+const userRouter = require("./routes/userRoutes");
+const { isAuth, isAdminAuth } = require("./auth/auth.js");
 const cookies = require("cookie-parser");
 
 const app = express();
@@ -22,6 +22,14 @@ app.post("/login", UserController.login);
 
 app.get("/admin", isAdminAuth, (req, res) => {
   res.render("admin");
+});
+
+app.get("/users", isAuth, (req, res) => {
+  res.redirect("/users/" + req.user.username);
+});
+
+app.get("/users/:username", isAuth, (req, res) => {
+  res.render("users", { user: req.user });
 });
 
 app.get("/logout", UserController.logout);
