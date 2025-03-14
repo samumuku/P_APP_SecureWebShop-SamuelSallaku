@@ -1,6 +1,6 @@
 const mysql = require("mysql2");
 
-// Create a connection to the database
+// Creer une connexion a la DB
 const conn = mysql.createPool({
   host: "db_container",
   port: 3306,
@@ -9,7 +9,7 @@ const conn = mysql.createPool({
   database: "db_siteecom",
 });
 
-// Connect to the database
+// Se connecter a la DB
 conn.getConnection((err) => {
   if (err) throw err;
   console.log("Connected to MySQL Database!");

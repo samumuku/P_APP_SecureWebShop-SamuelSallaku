@@ -20,8 +20,9 @@ app.post("/register", UserController.register);
 
 app.post("/login", UserController.login);
 
+// Proteger la route /admin avec le middleware isAdminAuth
 app.get("/admin", isAdminAuth, (req, res) => {
-  res.render("admin");
+  res.render("admin", { users: req.users });
 });
 
 app.get("/users", isAuth, (req, res) => {
@@ -38,7 +39,7 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 
-// Protect the home route
+// Proteger la route /home avec le middleware isAuth
 app.get("/home", isAuth, (req, res) => {
   res.render("home", { user: req.user });
 });

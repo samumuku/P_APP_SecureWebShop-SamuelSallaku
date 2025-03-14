@@ -3,9 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Users</title>
+    <title>Profile de <%= user.username %></title>
+    <link rel="stylesheet" href="/css/users.css" />
   </head>
   <body>
-    <h1>Test <%= user.username %></h1>
+    <header>
+      <h1>Bienvenue, <%= user.username %>!</h1>
+      <nav>
+        <ul>
+          <li><a href="/home">Accueil</a></li>
+          <li><a href="/users/<%= user.username %>">Profil</a></li>
+          <li><a href="/admin">Admin</a></li>
+          <li><a href="/logout">Déconnexion</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="profile-container">
+        <div class="profile-card">
+          <h2>Profil de <%= user.username %></h2>
+          <p><strong>Rôle:</strong> <%= user.role %></p>
+          <p>
+            <strong>Date d'inscription:</strong> <%= new
+            Date(user.createdAt).toLocaleDateString() %>
+          </p>
+          <a href="/logout" class="logout-btn">Se déconnecter</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Mon Site. Tous droits réservés.</p>
+    </footer>
   </body>
 </html>

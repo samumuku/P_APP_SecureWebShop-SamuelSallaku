@@ -1,11 +1,48 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin page</title>
+    <title>Admin - User Management</title>
+    <link rel="stylesheet" href="/css/admin.css" />
   </head>
   <body>
-    <h1>Admin page !</h1>
+    <header>
+      <h1>Admin Panel</h1>
+      <nav>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/users/">Profil</a></li>
+          <li><a href="/admin">Admin</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="admin-container">
+        <h2>User List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+            <tr>
+              <td><%= user.username %></td>
+              <td><%= user.role %></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 My Site. All rights reserved.</p>
+    </footer>
   </body>
 </html>
